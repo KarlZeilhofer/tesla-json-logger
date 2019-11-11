@@ -4,10 +4,23 @@ import logging
 
 # Some global constants
 site = 'owner-api.teslamotors.com'
-rcFile = os.path.expanduser('~/.teslarc')
-logHome = os.path.expanduser('~/logs')
-dataLogHome = os.path.expanduser('~/Documents/Tesla')
-logger = logging.getLogger('Tesla')
+appname = 'tesla-json-logger'
+appDataPath = os.path.expanduser('~/.config/'+appname)
+rcFile = os.path.join(appDataPath, 'teslarc')
+logHome = os.path.join(appDataPath, 'logs')
+dataLogHome = os.path.join(appDataPath, 'data')
+logger = logging.getLogger(appname)
+
+def createPaths():
+    if not os.path.exists(appDataPath):
+        os.mkdir(appDataPath)
+
+    if not os.path.exists(logHome):
+        os.mkdir(logHome)
+        
+    if not os.path.exists(dataLogHome):
+        os.mkdir(dataLogHome)
+
 
 def setLogPrefix(prefix):
     logfile = '{}/{}-{}.log'.format(logHome, prefix, time.strftime('%Y%m%d', time.localtime(time.time())))

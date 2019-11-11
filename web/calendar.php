@@ -25,7 +25,7 @@ date_default_timezone_set('America/Chicago');
 #date_default_timezone_set('UTC');
 
 // Global variables
-$store = '/home/boonleng/Documents/Tesla';
+$store = '/home/boonleng/Documents/Tesla'; // TODO: replace fixed path!
 $debug = False;
 $count = 5;
 $width = 123;

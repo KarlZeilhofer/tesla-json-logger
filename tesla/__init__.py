@@ -34,6 +34,8 @@ import requests
 from .base import *
 from . import account
 
+
+base.createPaths()
 config = account.getConfig()
 
 def requestData(index=0, retry=True):
@@ -61,7 +63,7 @@ def requestData(index=0, retry=True):
 
 def objFromFile(filename):
     with open(filename, 'r') as fobj:
-        json_str = fobj.readline()
+        json_str = fobj.read()
         fobj.close()
     return json.loads(json_str)
 

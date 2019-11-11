@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set('UTC');
 
-$store = '/home/boonleng/Documents/Tesla';
+$store = '/home/boonleng/Documents/Tesla'; // TODO: replace fixed path!
 $folders = scandir($store, 0);
 $folders = array_slice($folders, count($folders) - 35);
 

@@ -72,7 +72,7 @@ def getConfig(force=False):
         else:
             base.logger.exception('Unable to retrieve list of vehicles.')
 
-        # Get the timezone from vehicle's location? Hard-code for now...
+        # TODO: Get the timezone from vehicle's location? Hard-code for now...
         timezone = 'US/Central'
 
         # Save username and token into the configuration

@@ -36,6 +36,7 @@ import os
 import time
 import json
 import argparse
+import shutil
 
 import tesla
 
@@ -57,6 +58,7 @@ if __name__ == '__main__':
     parser.add_argument('-v', default=0, action='count', help='increase the verbosity level')
     parser.add_argument('-u', default=False, action="store_true", help='updates the HTML calendar')
     parser.add_argument('-w', default=False, action="store_true", help='writes the results to a file')
+    # TODO: parser.add_argument('-uscs', default=False, action="store_true", help='use United States customary system (miles and Farenheit)')
     args = parser.parse_args()
 
     # Set the logger to output something if verbosity flag is set
@@ -74,7 +76,7 @@ if __name__ == '__main__':
     if dat is None:
         tesla.logger.info('Vehicle is sleeping')
     else:
-        jsonString = json.dumps(dat)
+        jsonString = json.dumps(dat, indent=4)
 
         tesla.logger.info('Data received. battery_level = {}%   range = {} / {} mi   write = {}'.format(
             dat['charge_state']['battery_level'],
@@ -91,8 +93,11 @@ if __name__ == '__main__':
                 fid.write(jsonString)
                 fid.close()
         if args.u:
+            blobPath = os.path.join(tesla.appDataPath, 'blob')
+            if not os.path.exists(blobPath):
+                shutil.copytree('./blob', blobPath)
             code = tesla.getDataInHTML()
-            with open(os.path.expanduser('~/Developer/tesla/calendar.html'), 'w') as fid:
+            with open(os.path.join(tesla.appDataPath, 'calendar.html'), 'w') as fid:
                 fid.write(code)
                 fid.close()
             tesla.logger.info('HTML calendar updated.')

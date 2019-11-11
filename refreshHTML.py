@@ -7,7 +7,7 @@ import os
 import tesla
 
 code = tesla.getDataInHTML(5)
-with open(os.path.expanduser('~/Developer/tesla/calendar.html'), 'w') as fid:
+with open(os.path.expanduser(base.appDataPath), 'w') as fid:
     fid.write(code)
     fid.close()
 tesla.logger.info('HTML calendar updated.')
